@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: apps/v1  # Corrected API version
 kind: Deployment
 metadata:
   name: my-web-app
@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: my-container
-        image: nginx:latest  # Using nginx for simplicity; replace with your app's image
+        image: nginx:latest
+        imagePullPolicy: IfNotPresent  # Added imagePullPolicy
         ports:
         - containerPort: 80
 
@@ -28,6 +29,6 @@ spec:
     app: my-web-app
   ports:
   - protocol: TCP
-    port: 80  # Port exposed by the service
-    targetPort: 80 # Port the container is listening on
-  type: LoadBalancer # Or ClusterIP if you don't need external access
+    port: 80
+    targetPort: 80
+  type: LoadBalancer  # Or ClusterIP
